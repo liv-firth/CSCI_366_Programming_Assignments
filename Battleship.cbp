@@ -509,5 +509,26 @@
 		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\test\"/>
 		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/correct_fire_message.json">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/correct_hit_action_board.json">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/correct_hit_result.json">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/correct_miss_action_board.json">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/correct_miss_result.json">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/correct_out_of_bounds_result.json">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/correct_start_action_board.json">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
 	</Project>
 </CodeBlocks_project_file>
