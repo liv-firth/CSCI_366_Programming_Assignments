@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="CSCI_366_Programming_Assignments"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CSCI_366_Programming_Assignments">
+				<Option output="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/CSCI_366_Programming_Assignments" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 CSCI_366_Programming_Assignments"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CSCI_366_Programming_Assignments/fast">
+				<Option output="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/CSCI_366_Programming_Assignments" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 CSCI_366_Programming_Assignments/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/CMakeLists.txt">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/LICENSE.md">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/README.md">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/images/system_architecture.png">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/player_1.setup_board.txt">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/player_2.setup_board.txt">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/CMakeLists.txt">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/Client.cpp">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/Client.hpp">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/Server.cpp">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/Server.hpp">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/client_main.cpp">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/common.hpp">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/server_main.cpp">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/CMakeLists.txt">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/test/tests.cpp">
+			<Option target="CSCI_366_Programming_Assignments"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -12,6 +12,9 @@ add_library(SERVER Server.cpp Server.hpp)
 
 add_library(CLIENT Client.cpp Client.hpp)
 
+#this is the line I added
+add_library(JSON jsoncpp.cpp ../cereal/include/cereal/json.h)
+
 add_executable(run_server server_main.cpp Server.cpp)
 
 add_executable(run_client client_main.cpp Client.cpp)

@@ -21,6 +21,8 @@
 #include <thread>
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
 int main(){
     cout << "Starting Battleship server" << endl;
 
@@ -42,3 +44,4 @@ int main(){
     }
 
 }
+#pragma clang diagnostic pop

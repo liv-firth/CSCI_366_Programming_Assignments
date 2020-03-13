@@ -105,6 +105,17 @@ public:
      */
     string render_action_board();
 
+
+
+
+
+
+
+
+    void decerealize(string fname, vector<vector<int>> array1);
+    void cerealizeSmall(string fname, vector<unsigned int> array1);
+    void decerealizeSmall(string fname, vector<unsigned int> array1);
+    void cerealize(string fname, vector<vector<int>> array1);
 };
 
 
