@@ -25,7 +25,6 @@
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
 int main(){
     cout << "Starting Battleship server" << endl;
-
     Server s;
     s.initialize(BOARD_SIZE, "player_1.setup_board.txt", "player_2.setup_board.txt");
 

@@ -1,6 +1,6 @@
 #copy the board files into runtime directory
-configure_file(${PROJECT_SOURCE_DIR}/player_1.setup_board.txt ${PROJECT_SOURCE_DIR}/cmake-build-debug/test/player_1.setup_board.txt COPYONLY)
-configure_file(${PROJECT_SOURCE_DIR}/player_2.setup_board.txt ${PROJECT_SOURCE_DIR}/cmake-build-debug/test/player_2.setup_board.txt COPYONLY)
+configure_file(../src/player_1.setup_board.txt ${PROJECT_SOURCE_DIR}/cmake-build-debug/test/player_1.setup_board.txt COPYONLY)
+configure_file(../src/player_2.setup_board.txt ${PROJECT_SOURCE_DIR}/cmake-build-debug/test/player_2.setup_board.txt COPYONLY)
 
 # copy test action boards into runtime directory
 configure_file(${PROJECT_SOURCE_DIR}/test/correct_start_action_board.json

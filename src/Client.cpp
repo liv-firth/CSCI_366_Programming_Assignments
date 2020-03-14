@@ -25,6 +25,12 @@
 Client::~Client() {
     //constructor a player, 2 will need to run in parallel
    // wont need any code
+    string fname = "player_1.action_board.json";
+    //remove any existing files
+    remove(fname.c_str());
+    string cname = "player_2.action_board.json";
+    //remove any existing files
+    remove(cname.c_str());
 }
 
 
@@ -36,12 +42,14 @@ void Client::initialize(unsigned int play, unsigned int board_size){
     if(player == 1) {
         //to assign text file name correctly
         string fname = "player_1.action_board.json";
-
+        //remove any existing files
         remove(fname.c_str());
-
-        vector<vector<int> > array1 (board_size, vector<int>(board_size, 0));
-
-        cerealize(fname, array1);
+        //make a vector
+        vector<vector<string> > array1 (board_size, vector<string>(board_size,"_" ));
+        //cerealize
+        ofstream array_ab2(fname); // create an output file stream
+        cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
+        write_archive(cereal::make_nvp("array", array1)); // serialize the data giving it a name
 
     }
 
@@ -51,42 +59,44 @@ void Client::initialize(unsigned int play, unsigned int board_size){
 
         remove(fname.c_str());
 
-        vector<vector<int> > array1 (board_size, vector<int>(board_size, 0));
+        vector<vector<string> > array1 (board_size, vector<string>(board_size, "_"));
 
-        cerealize(fname, array1);
+        //cerealize
+        ofstream array_ab2(fname); // create an output file stream
+        cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
+        write_archive(cereal::make_nvp("array", array1)); // serialize the data giving it a name
 
     }
     initialized = true;
 }
 
 
-void Client::fire(unsigned int x, unsigned int y) {
+void Client::fire(unsigned int inputX, unsigned int inputY) {
     printf("Running fire");
     // creates json shot file
     if(player ==1) {
         printf("player 1, fire");
         string fname = "player_1.shot.json";
         // transfers input x and y into file
-        vector<unsigned int> shot{ x , y};
-        cerealizeSmall(fname, shot);
-        // serialize the array
-        //ofstream array_fire1(fname); // create an output file stream
-        //cereal::JSONOutputArchive write_archive(array_fire1); // initialize an archive on the file
-        //write_archive(cereal::make_nvp("shot", shot)); // serialize the data giving it a name
-        //write_archive.finishNode(); // wait for the writing process to finish
-        //array_fire1.close(); // close the file
+        unsigned int x = inputX;
+        unsigned int y = inputY;
+        //cerealize
+        ofstream array_ab2(fname); // create an output file stream
+        cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
+        write_archive(cereal::make_nvp("x", x),cereal::make_nvp("y", y) ); // serialize the data giving it a name
+
     }
     if(player ==2){
         string fname = "player_2.shot.json";
         // transfers input x and y into file
-        vector<unsigned int> shot{ x , y};
+        unsigned int x = inputX;
+        unsigned int y = inputY;
+        //cerealize
+        ofstream array_ab2(fname); // create an output file stream
+        cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
+        write_archive(cereal::make_nvp("x", x),cereal::make_nvp("y", y) ); // serialize the data giving it a name
 
-        // serialize the array
-        ofstream array_fire2(fname); // create an output file stream
-        cereal::JSONOutputArchive write_archive(array_fire2); // initialize an archive on the file
-        write_archive(cereal::make_nvp("shot", shot)); // serialize the data giving it a name
-        //write_archive.finishNode(); // wait for the writing process to finish
-        array_fire2.close(); // close the file
+
     }
 
 }
@@ -105,7 +115,7 @@ bool Client::result_available() {
 
         else { return false; }
     }
-    else  if(player == 2) {
+    if(player == 2) {
         ifstream array_result2("player_2.result.json", ifstream::binary);
         if (array_result2) {
             cout << "The file exists" << endl;
@@ -121,56 +131,74 @@ int Client::get_result() {
     printf("Running get result");
     // reads result file
     // returns result (as an int [HIT, MISS, OUT OF BOUNDS])
-    if(player = 1) {
+    if (player == 1) {
         ifstream array_result1("player_1.result.json", ifstream::binary);
-        ostringstream temp;
-        temp << array_result1.rdbuf();
-        string s = temp.str();
-        cout << s << endl;
-        //HIT
-        if (s == "1") {
-            return 1;
+        //check to see if shot file exists
+        if (array_result1) {
+            //reads in x and y from json file
+            unsigned int res;
+            // deserialize the array
+            cereal::JSONInputArchive read_archive(array_result1); // initialize an archive on the file
+            read_archive(res); // deserialize the array
+            cout << res << endl;
+            if (res != 0 && res != 1 && res != 0) { throw invalid_argument("Bad result."); }
+            //HIT
+            if (res == 1) {
+                return 1;
+            }
+                //MISS
+            else if (res == -1) {
+            }
+                //OUT OF BOUNDS
+            else if (res == 0) {
+                return 0;
+            }
+            string fname = "player_1.result_board.json";
+            // remove any old serialization files
+            remove(fname.c_str());
         }
-            //MISS
-        else if (s == "-1") {
+
+        if (player == 2) {
+            ifstream array_result1("player_2.result.json", ifstream::binary);
+            //check to see if shot file exists
+            if (array_result1) {
+                //reads in x and y from json file
+                unsigned int res;
+                // deserialize the array
+                cereal::JSONInputArchive read_archive(array_result1); // initialize an archive on the file
+                read_archive(res); // deserialize the array
+                cout << res << endl;
+                if (res != 0 && res != 1 && res != 0) { throw invalid_argument("Bad result."); }
+                //HIT
+                if (res == 1) {
+                    return 1;
+                }
+                    //MISS
+                else if (res == -1) {
+                }
+                    //OUT OF BOUNDS
+                else if (res == 0) {
+                    return 0;
+                }
+                string fname = "player_2.result_board.json";
+                // remove any old serialization files
+                remove(fname.c_str());
+            }
+            //string fname = "player_2.result_board.json";
+            // remove any old serialization files
+            //remove(fname.c_str());
+            //string cname = "player_1.result_board.json";
+            // remove any old serialization files
+            //remove(cname.c_str());
         }
-            //OUT OF BOUNDS
-        else if (s == "0") {
-            return 0;
-        }
-        string fname = "player_1.result_board.json";
-        // remove any old serialization files
-        remove(fname.c_str());
-    }
-    if(player = 2) {
-        ifstream array_result2("player_2.result.json", ifstream::binary);
-        ostringstream temp;
-        temp << array_result2.rdbuf();
-        string s = temp.str();
-        cout << s << endl;
-        //HIT
-        if (s == "1") {
-            return 1;
-        }
-            //MISS
-        else if (s == "-1") {
-        }
-            //OUT OF BOUNDS
-        else if (s == "0") {
-            return 0;
-        }
-        string fname = "player_2.result_board.json";
-        // remove any old serialization files
-        remove(fname.c_str());
     }
 }
-
 
 
 void Client::update_action_board(int result, unsigned int x, unsigned int y) {
     printf("Running update action board");
     //updates player action board
-    if(player =1) {
+    if(player == 1) {
         string fname = "player_1.action_board.json";
         //create an array
         vector<vector<int> > array1(board_size);
@@ -196,7 +224,7 @@ void Client::update_action_board(int result, unsigned int x, unsigned int y) {
         //write_archive.finishNode(); // wait for the writing process to finish
         array_ab1.close(); // close the file
     }
-    if(player =2) {
+    if(player == 2) {
         string fname = "player_2.action_board.json";
         //create an array
         vector<vector<int> > array1(board_size);
@@ -225,25 +253,26 @@ void Client::update_action_board(int result, unsigned int x, unsigned int y) {
 
 }
 
-void Client::cerealize(string fname, vector<vector<int>> array1){
-    ofstream array_ab2(fname); // create an output file stream
-    cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
-    write_archive(cereal::make_nvp("array", array1)); // serialize the data giving it a name
-    write_archive.finishNode(); // wait for the writing process to finish
-    array_ab2.close(); // close the file
-}
-void Client::cerealizeSmall(string fname, vector<unsigned int> array1) {
-    ofstream array_ab2(fname); // create an output file stream
-    cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
-    write_archive(cereal::make_nvp("array", array1)); // serialize the data giving it a name
-    write_archive.finishNode(); // wait for the writing process to finish
-    array_ab2.close(); // close the file
-}
+//void Client::cerealize(string fname, vector<vector<int>> array1){
+    //ofstream array_ab2(fname); // create an output file stream
+    //cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
+    //write_archive(cereal::make_nvp("array", array1)); // serialize the data giving it a name
+    //write_archive.finishNode(); // wait for the writing process to finish
+    //array_ab2.close(); // close the file
+//}
+//void Client::cerealizeSmall(string fname, unsigned int x, unsigned int y) {
+    //ofstream array_ab2(fname); // create an output file stream
+    //cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
+    //write_archive(cereal::make_nvp("x", x),cereal::make_nvp("y", y) ); // serialize the data giving it a name
+
+   // write_archive.finishNode(); // wait for the writing process to finish
+    //array_ab2.close(); // close the file
+//}
 
 string Client::render_action_board() {
     printf("Running render action board");
     // prints opposite players action board (where they have already fired/hit)
-    if (player = 1) {
+    if (player == 1) {
     string fname = "player_1.action_board.json";
     //create an array
     vector<vector<int> > array1(board_size);
@@ -260,7 +289,7 @@ string Client::render_action_board() {
         }
     }
 }
-    if (player = 2) {
+    if (player == 2) {
         string fname = "player_2.action_board.json";
         //create an array
         vector<vector<int> > array1(board_size);
@@ -279,18 +308,19 @@ string Client::render_action_board() {
     }
 }
 
-void Client::decerealize( string fname, vector<vector<int>> array1){
-    ifstream array_ab1(fname); // create an input file stream
-    cereal::JSONInputArchive read_archive(array_ab1); // initialize an archive on the file
-    read_archive(array1); // deserialize the array
-    array_ab1.close(); // close the file
+//void Client::decerealize( string fname, vector<vector<int>> array1){
+    //ifstream array_ab1(fname); // create an input file stream
+    //cereal::JSONInputArchive read_archive(array_ab1); // initialize an archive on the file
+    //read_archive(array1); // deserialize the array
+   // array_ab1.close(); // close the file
 
-}
-void Client::decerealizeSmall( string fname, vector<unsigned int> array1){
-    ifstream array_ab1(fname); // create an input file stream
-    cereal::JSONInputArchive read_archive(array_ab1); // initialize an archive on the file
-    read_archive(array1); // deserialize the array
-    array_ab1.close(); // close the file
+//}
+//void Client::decerealizeSmall( string fname, unsigned  x, unsigned  y){
+    //ifstream array_ab1(fname); // create an input file stream
+    //cereal::JSONInputArchive read_archive(array_ab1); // initialize an archive on the file
+    //read_archive(x); // deserialize the array
+    //read_archive(y);
+    //array_ab1.close(); // close the file
 
-}
+//}
 

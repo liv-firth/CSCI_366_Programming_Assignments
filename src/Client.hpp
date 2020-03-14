@@ -112,10 +112,13 @@ public:
 
 
 
-    void decerealize(string fname, vector<vector<int>> array1);
-    void cerealizeSmall(string fname, vector<unsigned int> array1);
-    void decerealizeSmall(string fname, vector<unsigned int> array1);
-    void cerealize(string fname, vector<vector<int>> array1);
+    //void decerealize(string fname, vector<vector<int>> array1);
+
+    //void decerealizeSmall(string fname, unsigned x, unsigned y);
+
+    //void cerealize(string fname, vector<vector<int>> array1);
+
+    //void cerealizeSmall(string fname, unsigned int x, unsigned int y);
 };
 
 
