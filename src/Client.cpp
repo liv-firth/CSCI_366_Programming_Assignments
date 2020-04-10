@@ -143,29 +143,29 @@ int Client::get_result() {
             cout << res << endl;
             if (res != 0 && res != 1 && res != -1) { throw invalid_argument("Bad result."); }
             //HIT
-            if (res == 1) {
+            if (res == HIT) {
                 string cname = "player_1.result.json";
                 //remove any existing files
-                remove(cname.c_str());
+                //remove(cname.c_str());
                 return HIT;
             }
                 //MISS
-            else if (res == -1) {
+            else if (res == MISS) {
                 string cname = "player_1.result.json";
                 //remove any existing files
-                remove(cname.c_str());
+                //remove(cname.c_str());
                 return MISS;
             }
                 //OUT OF BOUNDS
-            else if (res == 0) {
+            else if (res == OUT_OF_BOUNDS) {
                 string cname = "player_1.result.json";
                 //remove any existing files
-                remove(cname.c_str());
+                //remove(cname.c_str());
                 return OUT_OF_BOUNDS;
             }
             string fname = "player_1.result_board.json";
             // remove any old serialization files
-            remove(fname.c_str());
+            //remove(fname.c_str());
         }
     }
 
@@ -181,24 +181,24 @@ int Client::get_result() {
                 cout << res << endl;
                 if (res != 0 && res != 1 && res != -1) { throw invalid_argument("Bad result."); }
                 //HIT
-                if (res == 1) {
+                if (res == HIT) {
                     string cname = "player_2.result.json";
                     //remove any existing files
-                    remove(cname.c_str());
+                    //remove(cname.c_str());
                     return HIT;
                 }
                     //MISS
-                else if (res == -1) {
+                else if (res == MISS) {
                     string cname = "player_2.result.json";
                     //remove any existing files
-                    remove(cname.c_str());
+                    //remove(cname.c_str());
                     return MISS;
                 }
                     //OUT OF BOUNDS
-                else if (res == 0) {
+                else if (res == OUT_OF_BOUNDS) {
                     string cname = "player_2.result.json";
                     //remove any existing files
-                    remove(cname.c_str());
+                    //remove(cname.c_str());
                     return OUT_OF_BOUNDS;
                 }
 

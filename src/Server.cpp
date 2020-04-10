@@ -42,7 +42,6 @@ int get_file_length(ifstream *file){
 void Server::initialize(unsigned int board, string p1_board, string p2_board){
     //SET BOARD SIZE
     board_size = board;
-    //printf("Running server initialize");
     //THROW EXCEPTIONS
     if(board_size <= 0 || board_size > 10)
     {throw invalid_argument("Board size must be greater than zero.");}
@@ -67,36 +66,14 @@ int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
     //THROW ERROR FOR WRONG PLAYER NUMBER
     if(player != 2 && player != 1)
     {throw invalid_argument("Bad player number");}
+
     //IF PLAYER 1
     if (player == 1) {
-    //{ifstream inputFile;
-
-       // inputFile.open("player_1.setup_board.txt");
-        //inputFile >> board_size;
-        //inputFile >> board_size;
-
-        //char *board= new char[board_size*board_size];
-        //for (int row = 0; row < board_size; row++)
-        //{
-            //for (int col = 0; col < board_size; col++)
-            //{
-                //inputFile >> *(board + board_size * row + col);
-            //}
-        //}
-
-        //for (int row = 0; row < board_size; row++) //////////////TO TEST PRINT
-        //{
-            //for (int col = 0; col < board_size; col++)
-            //{
-                //cout << *(board + board_size * row + col) << " ";
-            //}
-            //cout << endl;
-
-
         //TRANSLATE THE BOARD
-        ifstream fin("player_1.setup_board.txt");
-
+        ifstream fin("player_2.setup_board.txt");
+        //IF THE FILE IS THERE
     if (fin) {
+        //NEW VECTOR OF STRINGS
     vector<string> board;
     string line;
     while (getline(fin, line)) {
@@ -109,54 +86,47 @@ int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
 
     //INITIALIZE RES
     unsigned int res;
-    //if out of bounds
     //CHECK THE BOUNDS
-    if ((x > board_size - 1 || x < 0) || (y > board_size - 1 || y < 0)) {
-        res = 0;
+    if ((x > board_size -1  || x < 0) || (y > board_size -1   || y < 0)) {
+        //SET RES TO BE WRITTEN TO THE FILE
+        res = OUT_OF_BOUNDS;
+        //SET AND WRITE TO THE FILE
         string fname = {"player_1.result.json"};
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
-       write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-        //string fdel = "player_2.shot.json";
-        //remove(fdel.c_str());
+       write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+       //RETURN OUT OF B
         return OUT_OF_BOUNDS;
     }
-    //if miss
-    if (s != "_") {
-        res = 1;
+    //CHECK FOR MISS
+    if (s == "_") {
+        res = MISS;
         string fname = {"player_1.result.json"};
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
-        write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-        //string fdel = "player_2.shot.json";
-        //remove(fdel.c_str());
-        return HIT;
-    }
-        //if hit
-    else {
-        res = -1;
-        string fname = {"player_1.result.json"};
-        ofstream array_result1(fname); // create an output file stream
-        cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
-        write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-        //string fdel = "player_2.shot.json";
-        //remove(fdel.c_str());
+        write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
         return MISS;
     }
-    cout << res << endl;
-
-
-    //delete shot file
+        //ELSE IT MUST BE A HIT
+    else {
+        res = HIT;
+        string fname = {"player_1.result.json"};
+        ofstream array_result1(fname); // create an output file stream
+        cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
+        write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+        return HIT;
+    }
 
 }
-        }
+        }//player1
+//IF PLAYER 2
         if (player == 2) {
-            ifstream fin("player_2.setup_board.txt");
+            ifstream fin1("player_1.setup_board.txt");
 
-if(fin) {
+if(fin1) {
     vector<string> board;
     string line;
-    while (getline(fin, line)) {
+    while (getline(fin1, line)) {
         board.push_back(line);
     }
 
@@ -164,48 +134,35 @@ if(fin) {
     //create the result file
     string s;
     s = board[x][y];
-    //string fname = {"player_2.result.json"};
-    // all of the stuff to fill the file
     unsigned int res;
     //if out of bounds
-    if ((x > board_size - 1 || x < 0) || (y > board_size - 1 || y < 0)) {
-        res = 0;
+    if ((x > board_size - 1  || x < 0) || (y > board_size - 1  || y < 0)) {
+        res = OUT_OF_BOUNDS;
         string fname = {"player_2.result.json"};
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
-        write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-        //string fdel = "player_1.shot.json";
-        //remove(fdel.c_str());
+        write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
         return OUT_OF_BOUNDS;
     }
     //if miss
-    if (s != "_") {
-        res = 1;
+    if (s == "_") {
+        res = MISS;
         string fname = {"player_2.result.json"};
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
-        write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-        //string fdel = "player_1.shot.json";
-        //remove(fdel.c_str());
-        return HIT;
+        write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+        return MISS;
     }
         //if hit
     else {
-        res = -1;
+        res = HIT;
         string fname = {"player_2.result.json"};
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
-        write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-        //string fdel = "player_1.shot.json";
-        //remove(fdel.c_str());
-        return MISS;
+        write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+        return HIT;
     }
-    cout << res << endl;
 
-
-    //delete shot file
-    string fdel = "player_2.shot.json";
-    remove(fdel.c_str());
 }
 
         }
@@ -220,7 +177,7 @@ int Server::process_shot(unsigned int player) {
 
     if(player == 1) {
         printf("player 1");
-        ifstream array_fire1("player_2.shot.json");
+        ifstream array_fire1("player_1.shot.json");
         //check to see if shot file exists
         if (array_fire1) {
             //reads in x and y from json file
@@ -237,46 +194,46 @@ int Server::process_shot(unsigned int player) {
                 throw invalid_argument("Out of bounds shot");
             }
             // x = x;
-            //y = y;
+           //y = y;
             cout<< x << endl;
             cout << y << endl;
             //evaluate_shot(1, x, y);
             unsigned int res;
             string fname = {"player_1.result.json"};
             if(evaluate_shot(1, x, y) == HIT){
-                res = 1;
+                res = HIT;
                 string fname = {"player_1.result.json"};
                 ofstream array_result1(fname); // create an output file stream
                 cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
-                write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-                string fdel = "player_2.shot.json";
+                write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+                string fdel = "player_1.shot.json";
                 remove(fdel.c_str());
                 return SHOT_FILE_PROCESSED;
             }
             if(evaluate_shot(1, x, y) == MISS){
-                res = -1;
+                res = MISS;
                 string fname = {"player_1.result.json"};
                 ofstream array_result1(fname); // create an output file stream
                 cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
-                write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-                string fdel = "player_2.shot.json";
+                write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+                string fdel = "player_1.shot.json";
                 remove(fdel.c_str());
                 return SHOT_FILE_PROCESSED;
             }
             if(evaluate_shot(1, x, y) == OUT_OF_BOUNDS){
-                res = 0;
+                res = OUT_OF_BOUNDS;
                 string fname = {"player_1.result.json"};
                 ofstream array_result1(fname); // create an output file stream
                 cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
-                write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-                string fdel = "player_2.shot.json";
+                write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+                string fdel = "player_1.shot.json";
                 remove(fdel.c_str());
             return SHOT_FILE_PROCESSED;
         }
 
         }
         else {
-            string fdel = "player_2.shot.json";
+            string fdel = "player_1.shot.json";
             remove(fdel.c_str());
             return NO_SHOT_FILE;
         }
@@ -284,7 +241,7 @@ int Server::process_shot(unsigned int player) {
 
     }
         if (player == 2) {
-            ifstream array_fire1("player_1.shot.json");
+            ifstream array_fire1("player_2.shot.json");
             //check to see if shot file exists
             if (array_fire1) {
                 //reads in x and y from json file
@@ -308,39 +265,39 @@ int Server::process_shot(unsigned int player) {
                 unsigned int res;
                 string fname = {"player_2.result.json"};
                 if(evaluate_shot(2, x, y) == HIT){
-                    res = 1;
+                    res = HIT;
                     string fname = {"player_2.result.json"};
                     ofstream array_result2(fname); // create an output file stream
                     cereal::JSONOutputArchive write_archive(array_result2); // initialize an archive on the file
-                    write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-                    string fdel = "player_1.shot.json";
+                    write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+                    string fdel = "player_2.shot.json";
                     remove(fdel.c_str());
                     return SHOT_FILE_PROCESSED;
                 }
                 if(evaluate_shot(2, x, y) == MISS){
-                    res = -1;
+                    res = MISS;
                     string fname = {"player_2.result.json"};
                     ofstream array_result2(fname); // create an output file stream
                     cereal::JSONOutputArchive write_archive(array_result2); // initialize an archive on the file
-                    write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-                    string fdel = "player_1.shot.json";
+                    write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+                    string fdel = "player_2.shot.json";
                     remove(fdel.c_str());
                     return SHOT_FILE_PROCESSED;
                 }
                 if(evaluate_shot(2, x, y) == OUT_OF_BOUNDS){
-                    res = 0;
+                    res = OUT_OF_BOUNDS;
                     string fname = {"player_2.result.json"};
                     ofstream array_result2(fname); // create an output file stream
                     cereal::JSONOutputArchive write_archive(array_result2); // initialize an archive on the file
-                    write_archive(cereal::make_nvp("res", res)); // serialize the data giving it a name
-                    string fdel = "player_1.shot.json";
+                    write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+                    string fdel = "player_2.shot.json";
                     remove(fdel.c_str());
                     return SHOT_FILE_PROCESSED;
                 }
 
             }
             else {
-                string fdel = "player_1.shot.json";
+                string fdel = "player_2.shot.json";
                 remove(fdel.c_str());
                 return NO_SHOT_FILE;
             }
