@@ -61,6 +61,13 @@ void Server::initialize(unsigned int board, string p1_board, string p2_board){
 }
 
 
+Server::~Server() {
+}
+
+
+BitArray2D *Server::scan_setup_board(string setup_board_name){
+}
+
 int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
     printf("Running evaluate shot");
     //THROW ERROR FOR WRONG PLAYER NUMBER
