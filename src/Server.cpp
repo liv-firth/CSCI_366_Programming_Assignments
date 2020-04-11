@@ -83,11 +83,15 @@ int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
     //GET THE CHARACTER AT X AND Y
     string s;
     s = board[x][y];
-
+        cout<< "////////" << x << endl;
+        cout << "/////" << y << endl;
+        cout << "/////" << BOARD_SIZE << endl;
+        cout << "///" << s << endl;
     //INITIALIZE RES
     unsigned int res;
     //CHECK THE BOUNDS
-    if ((x > board_size -1  || x < 0) || (y > board_size -1   || y < 0)) {
+    if ((x >= BOARD_SIZE   || x < 0) || (y >= BOARD_SIZE || y < 0)) {
+
         //SET RES TO BE WRITTEN TO THE FILE
         res = OUT_OF_BOUNDS;
         //SET AND WRITE TO THE FILE
@@ -136,7 +140,12 @@ if(fin1) {
     s = board[x][y];
     unsigned int res;
     //if out of bounds
-    if ((x > board_size - 1  || x < 0) || (y > board_size - 1  || y < 0)) {
+    cout<< "////" << x << endl;
+    cout << "///////" << y << endl;
+    cout << "/////" << BOARD_SIZE << endl;
+    cout << "//" << s << endl;
+    if ((x >= BOARD_SIZE  || x < 0) || (y >= BOARD_SIZE  || y < 0)) {
+
         res = OUT_OF_BOUNDS;
         string fname = {"player_2.result.json"};
         ofstream array_result1(fname); // create an output file stream
@@ -198,7 +207,7 @@ int Server::process_shot(unsigned int player) {
             cout<< x << endl;
             cout << y << endl;
             //evaluate_shot(1, x, y);
-            unsigned int res;
+            signed int res;
             string fname = {"player_1.result.json"};
             if(evaluate_shot(1, x, y) == HIT){
                 res = HIT;
@@ -262,7 +271,7 @@ int Server::process_shot(unsigned int player) {
                 cout<< x << endl;
                 cout << y << endl;
                 //evaluate_shot(1, x, y);
-                unsigned int res;
+                signed int res;
                 string fname = {"player_2.result.json"};
                 if(evaluate_shot(2, x, y) == HIT){
                     res = HIT;

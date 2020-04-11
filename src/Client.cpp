@@ -136,7 +136,7 @@ int Client::get_result() {
         //check to see if shot file exists
         if (array_result1) {
             //reads in x and y from json file
-            unsigned int res;
+            signed int res;
             // deserialize the array
             cereal::JSONInputArchive read_archive(array_result1); // initialize an archive on the file
             read_archive(res); // deserialize the array
@@ -146,21 +146,21 @@ int Client::get_result() {
             if (res == HIT) {
                 string cname = "player_1.result.json";
                 //remove any existing files
-                //remove(cname.c_str());
+                remove(cname.c_str());
                 return HIT;
             }
                 //MISS
             else if (res == MISS) {
                 string cname = "player_1.result.json";
                 //remove any existing files
-                //remove(cname.c_str());
+                remove(cname.c_str());
                 return MISS;
             }
                 //OUT OF BOUNDS
             else if (res == OUT_OF_BOUNDS) {
                 string cname = "player_1.result.json";
                 //remove any existing files
-                //remove(cname.c_str());
+                remove(cname.c_str());
                 return OUT_OF_BOUNDS;
             }
             string fname = "player_1.result_board.json";
@@ -174,7 +174,7 @@ int Client::get_result() {
             //check to see if shot file exists
             if (array_result1) {
                 //reads in x and y from json file
-                unsigned int res;
+                signed int res;
                 // deserialize the array
                 cereal::JSONInputArchive read_archive(array_result1); // initialize an archive on the file
                 read_archive(res); // deserialize the array
@@ -184,21 +184,21 @@ int Client::get_result() {
                 if (res == HIT) {
                     string cname = "player_2.result.json";
                     //remove any existing files
-                    //remove(cname.c_str());
+                    remove(cname.c_str());
                     return HIT;
                 }
                     //MISS
                 else if (res == MISS) {
                     string cname = "player_2.result.json";
                     //remove any existing files
-                    //remove(cname.c_str());
+                    remove(cname.c_str());
                     return MISS;
                 }
                     //OUT OF BOUNDS
                 else if (res == OUT_OF_BOUNDS) {
                     string cname = "player_2.result.json";
                     //remove any existing files
-                    //remove(cname.c_str());
+                    remove(cname.c_str());
                     return OUT_OF_BOUNDS;
                 }
 
