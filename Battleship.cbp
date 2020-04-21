@@ -441,6 +441,21 @@
 		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/googletest/googletest/src/gtest_main.cc">
 			<Option target="gtest_main"/>
 		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/BitArray2D.asm">
+			<Option target="run_client"/>
+			<Option target="run_server"/>
+			<Option target="SERVER"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/BitArray2D.cpp">
+			<Option target="run_client"/>
+			<Option target="run_server"/>
+			<Option target="SERVER"/>
+		</Unit>
+		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/BitArray2D.hpp">
+			<Option target="run_client"/>
+			<Option target="run_server"/>
+			<Option target="SERVER"/>
+		</Unit>
 		<Unit filename="/Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments/src/Client.cpp">
 			<Option target="run_client"/>
 			<Option target="CLIENT"/>

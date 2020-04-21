@@ -231,6 +231,50 @@ SERVER/fast:
 	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/SERVER.dir/build.make src/CMakeFiles/SERVER.dir/build
 .PHONY : SERVER/fast
 
+BitArray2D.o: BitArray2D.asm.o
+
+.PHONY : BitArray2D.o
+
+# target to build an object file
+BitArray2D.asm.o:
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/run_client.dir/build.make src/CMakeFiles/run_client.dir/BitArray2D.asm.o
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/run_server.dir/build.make src/CMakeFiles/run_server.dir/BitArray2D.asm.o
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/SERVER.dir/build.make src/CMakeFiles/SERVER.dir/BitArray2D.asm.o
+.PHONY : BitArray2D.asm.o
+
+BitArray2D.o: BitArray2D.cpp.o
+
+.PHONY : BitArray2D.o
+
+# target to build an object file
+BitArray2D.cpp.o:
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/run_client.dir/build.make src/CMakeFiles/run_client.dir/BitArray2D.cpp.o
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/run_server.dir/build.make src/CMakeFiles/run_server.dir/BitArray2D.cpp.o
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/SERVER.dir/build.make src/CMakeFiles/SERVER.dir/BitArray2D.cpp.o
+.PHONY : BitArray2D.cpp.o
+
+BitArray2D.i: BitArray2D.cpp.i
+
+.PHONY : BitArray2D.i
+
+# target to preprocess a source file
+BitArray2D.cpp.i:
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/run_client.dir/build.make src/CMakeFiles/run_client.dir/BitArray2D.cpp.i
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/run_server.dir/build.make src/CMakeFiles/run_server.dir/BitArray2D.cpp.i
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/SERVER.dir/build.make src/CMakeFiles/SERVER.dir/BitArray2D.cpp.i
+.PHONY : BitArray2D.cpp.i
+
+BitArray2D.s: BitArray2D.cpp.s
+
+.PHONY : BitArray2D.s
+
+# target to generate assembly for a file
+BitArray2D.cpp.s:
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/run_client.dir/build.make src/CMakeFiles/run_client.dir/BitArray2D.cpp.s
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/run_server.dir/build.make src/CMakeFiles/run_server.dir/BitArray2D.cpp.s
+	cd /Users/oliviafirth/Desktop/projects/CSCI_366_Programming_Assignments && $(MAKE) -f src/CMakeFiles/SERVER.dir/build.make src/CMakeFiles/SERVER.dir/BitArray2D.cpp.s
+.PHONY : BitArray2D.cpp.s
+
 Client.o: Client.cpp.o
 
 .PHONY : Client.o
@@ -389,6 +433,10 @@ help:
 	@echo "... run_server"
 	@echo "... JSON"
 	@echo "... SERVER"
+	@echo "... BitArray2D.o"
+	@echo "... BitArray2D.o"
+	@echo "... BitArray2D.i"
+	@echo "... BitArray2D.s"
 	@echo "... Client.o"
 	@echo "... Client.i"
 	@echo "... Client.s"

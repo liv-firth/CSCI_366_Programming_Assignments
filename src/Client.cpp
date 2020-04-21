@@ -78,9 +78,10 @@ void Client::fire(unsigned int inputX, unsigned int inputY) {
         printf("player 1, fire");
         string fname = "player_1.shot.json";
         // transfers input x and y into file
-        unsigned int x = inputX;
         unsigned int y = inputY;
+        unsigned int x = inputX;
         //cerealize
+
         ofstream array_ab2(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
         write_archive(cereal::make_nvp("x", x),cereal::make_nvp("y", y) ); // serialize the data giving it a name
@@ -89,8 +90,8 @@ void Client::fire(unsigned int inputX, unsigned int inputY) {
     if(player ==2){
         string fname = "player_2.shot.json";
         // transfers input x and y into file
-        unsigned int x = inputX;
         unsigned int y = inputY;
+        unsigned int x = inputX;
         //cerealize
         ofstream array_ab2(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_ab2); // initialize an archive on the file
@@ -163,9 +164,7 @@ int Client::get_result() {
                 remove(cname.c_str());
                 return OUT_OF_BOUNDS;
             }
-            string fname = "player_1.result_board.json";
-            // remove any old serialization files
-            //remove(fname.c_str());
+
         }
     }
 

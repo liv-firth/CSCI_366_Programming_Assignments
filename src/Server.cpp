@@ -30,7 +30,7 @@
  * @param file - the file whose length we want to query
  * @return length of the file in bytes
  */
-int get_file_length(ifstream *file){
+int _get_file_length(ifstream *file){
     printf("Running get file length");
  ifstream stream;
  stream.seekg(0, ios::end);
@@ -66,6 +66,7 @@ Server::~Server() {
 
 
 BitArray2D *Server::scan_setup_board(string setup_board_name){
+    //convert board to bits
 }
 
 int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
@@ -77,7 +78,7 @@ int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
     //IF PLAYER 1
     if (player == 1) {
         //TRANSLATE THE BOARD
-        ifstream fin("player_2.setup_board.txt");
+        ifstream fin("player_1.setup_board.txt");
         //IF THE FILE IS THERE
     if (fin) {
         //NEW VECTOR OF STRINGS
@@ -90,15 +91,14 @@ int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
     //GET THE CHARACTER AT X AND Y
     string s;
     s = board[x][y];
-        cout<< "////////" << x << endl;
-        cout << "/////" << y << endl;
-        cout << "/////" << BOARD_SIZE << endl;
-        cout << "///" << s << endl;
+        cout<< "x/////" << x << endl;
+        cout << "y////" << y << endl;
+        cout << "boardsize////" << BOARD_SIZE << endl;
+        cout << "s//" << s << endl;
     //INITIALIZE RES
-    unsigned int res;
+    signed int res;
     //CHECK THE BOUNDS
     if ((x >= BOARD_SIZE   || x < 0) || (y >= BOARD_SIZE || y < 0)) {
-
         //SET RES TO BE WRITTEN TO THE FILE
         res = OUT_OF_BOUNDS;
         //SET AND WRITE TO THE FILE
@@ -107,8 +107,10 @@ int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
        write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
        //RETURN OUT OF B
+        cout<< "OUT OF BOUNDS" << OUT_OF_BOUNDS << endl;
         return OUT_OF_BOUNDS;
     }
+
     //CHECK FOR MISS
     if (s == "_") {
         res = MISS;
@@ -116,6 +118,7 @@ int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
         write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+        cout<< "MISS" << MISS << endl;
         return MISS;
     }
         //ELSE IT MUST BE A HIT
@@ -125,6 +128,7 @@ int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
         write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+        cout<< "HIT" << HIT << endl;
         return HIT;
     }
 
@@ -132,7 +136,7 @@ int Server::evaluate_shot(unsigned int player, unsigned int x, unsigned int y) {
         }//player1
 //IF PLAYER 2
         if (player == 2) {
-            ifstream fin1("player_1.setup_board.txt");
+            ifstream fin1("player_2.setup_board.txt");
 
 if(fin1) {
     vector<string> board;
@@ -145,12 +149,12 @@ if(fin1) {
     //create the result file
     string s;
     s = board[x][y];
-    unsigned int res;
+    signed int res;
     //if out of bounds
-    cout<< "////" << x << endl;
-    cout << "///////" << y << endl;
-    cout << "/////" << BOARD_SIZE << endl;
-    cout << "//" << s << endl;
+    cout<< "x///" << x << endl;
+    cout << "y//////" << y << endl;
+    cout << "boardsize////" << BOARD_SIZE << endl;
+    cout << "s//" << s << endl;
     if ((x >= BOARD_SIZE  || x < 0) || (y >= BOARD_SIZE  || y < 0)) {
 
         res = OUT_OF_BOUNDS;
@@ -158,6 +162,7 @@ if(fin1) {
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
         write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+        cout<< "OUT OF BOUNDS" << OUT_OF_BOUNDS << endl;
         return OUT_OF_BOUNDS;
     }
     //if miss
@@ -167,6 +172,7 @@ if(fin1) {
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
         write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+        cout<< "MISS" << MISS << endl;
         return MISS;
     }
         //if hit
@@ -176,6 +182,7 @@ if(fin1) {
         ofstream array_result1(fname); // create an output file stream
         cereal::JSONOutputArchive write_archive(array_result1); // initialize an archive on the file
         write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
+        cout<< "HIT" << HIT << endl;
         return HIT;
     }
 
@@ -202,11 +209,16 @@ int Server::process_shot(unsigned int player) {
             cereal::JSONInputArchive read_archive(array_fire1); // initialize an archive on the file
             read_archive(x, y); // deserialize the array
             array_fire1.close(); // close the file
-            if(x > board_size - 1 || x < 0){
+            if(x > board_size - 1){
              throw invalid_argument("Out of bounds shot");
 }
-
-            if(y > board_size - 1 || y < 0){
+            if(x < 0) {
+                throw invalid_argument("Out of bounds shot");
+            }
+            if(y > board_size - 1){
+                throw invalid_argument("Out of bounds shot");
+            }
+            if(y < 0){
                 throw invalid_argument("Out of bounds shot");
             }
             // x = x;
@@ -224,6 +236,7 @@ int Server::process_shot(unsigned int player) {
                 write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
                 string fdel = "player_1.shot.json";
                 remove(fdel.c_str());
+                cout<< "Player 1 Process HIT/" << x << endl;
                 return SHOT_FILE_PROCESSED;
             }
             if(evaluate_shot(1, x, y) == MISS){
@@ -234,6 +247,7 @@ int Server::process_shot(unsigned int player) {
                 write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
                 string fdel = "player_1.shot.json";
                 remove(fdel.c_str());
+                cout<< "Player 1 Process Miss" << x << endl;
                 return SHOT_FILE_PROCESSED;
             }
             if(evaluate_shot(1, x, y) == OUT_OF_BOUNDS){
@@ -244,6 +258,7 @@ int Server::process_shot(unsigned int player) {
                 write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
                 string fdel = "player_1.shot.json";
                 remove(fdel.c_str());
+                cout<< "Player 1 Process Out of Bounds" << x << endl;
             return SHOT_FILE_PROCESSED;
         }
 
@@ -266,11 +281,16 @@ int Server::process_shot(unsigned int player) {
                 cereal::JSONInputArchive read_archive(array_fire1); // initialize an archive on the file
                 read_archive(x, y); // deserialize the array
                 //array_fire1.close(); // close the file
-                if(x > board_size - 1 || x < 0){
+                if(x > board_size - 1){
                     throw invalid_argument("Out of bounds shot");
                 }
-
-                if(y > board_size - 1 || y < 0){
+                if(x < 0) {
+                    throw invalid_argument("Out of bounds shot");
+                }
+                if(y > board_size - 1){
+                    throw invalid_argument("Out of bounds shot");
+                }
+                if(y < 0){
                     throw invalid_argument("Out of bounds shot");
                 }
                 // x = x;
@@ -288,6 +308,7 @@ int Server::process_shot(unsigned int player) {
                     write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
                     string fdel = "player_2.shot.json";
                     remove(fdel.c_str());
+                    cout<< "Player 2 Process Hit" << x << endl;
                     return SHOT_FILE_PROCESSED;
                 }
                 if(evaluate_shot(2, x, y) == MISS){
@@ -298,6 +319,7 @@ int Server::process_shot(unsigned int player) {
                     write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
                     string fdel = "player_2.shot.json";
                     remove(fdel.c_str());
+                    cout<< "Player 2 Process Miss" << x << endl;
                     return SHOT_FILE_PROCESSED;
                 }
                 if(evaluate_shot(2, x, y) == OUT_OF_BOUNDS){
@@ -308,6 +330,7 @@ int Server::process_shot(unsigned int player) {
                     write_archive(cereal::make_nvp("result", res)); // serialize the data giving it a name
                     string fdel = "player_2.shot.json";
                     remove(fdel.c_str());
+                    cout<< "Player 2 Process Out of Bounds" << x << endl;
                     return SHOT_FILE_PROCESSED;
                 }
 
